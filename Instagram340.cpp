@@ -6,7 +6,7 @@
 
 Instagram340::Instagram340()
 {
-	// TO DO: implement constructor
+	// TO DO: implement constructors
 }
 
 Instagram340::~Instagram340()
