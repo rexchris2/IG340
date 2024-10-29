@@ -41,7 +41,7 @@ void displayUserManu(User &user)
 		{
 			// TO DO: display user's profile information
 			//      : e.g. user.displayProfile();
-			//user.displayProfile();
+			// user.displayProfile();
 			std::cout << user;
 			// std::cout << insta;
 			break;
@@ -58,56 +58,45 @@ void displayUserManu(User &user)
 		}
 		case 3:
 		{
+			
 			// TO DO: ask user to choose between Reel and Story, ask them to input post details:
 			//        (title, media URL, video length in seconds)
 			//        Your program should set the time stamp to current time (code provided in Post.cpp)
 			// then create the post and add it to the user's posts
-			std::string postType, postName, urlName;
-			int videoLength;
+		
+			Post newPost;
 
-			std::cout << "Reel or Story: ";
-			std::cin >> postType;
+			std::cin >> newPost;
+			user.addPost(newPost);
 
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // sued to clear buffer
-
-			std::cout << "Title of Post: ";
-			std::getline(std::cin, postName); // Use getline to allow spaces in titles
-
-			std::cout << "Url name: ";
-			std::getline(std::cin, urlName); // Use getline for URL input
-
-			std::cout << "Video Length (seconds): ";
-			std::cin >> videoLength;
-
-			// Have a story/reel time limit
-			if (postType == "Reel")
-			{
-				if (videoLength > 90)
-				{
-					std::cout << "Reel Exceeds 90 seconds!" << std::endl;
-				}
-				else
-				{
-					Reel newReel(postType, postName, urlName, videoLength);
-					user.addPost(newReel);
-				}
-			}
-			else if (postType == "Story")
-			{
-				if (videoLength > 60)
-				{
-					std::cout << "Story Exceeds 60 seconds!" << std::endl;
-				}
-				else
-				{
-					Story newStory(postType, postName, urlName, videoLength);
-					user.addPost(newStory);
-				}
-			}
-			else
-			{
-				std::cout << "Invalid choice" << std::endl;
-			}
+			// if (postType == "Reel")
+			// {
+			// 	if (videoLength > 90)
+			// 	{
+			// 		std::cout << "Reel Exceeds 90 seconds!" << std::endl;
+			// 	}
+			// 	else
+			// 	{
+			// 		Reel newReel(postType, postName, urlName, videoLength);
+			// 		user.addPost(newReel);
+			// 	}
+			// }
+			// else if (postType == "Story")
+			// {
+			// 	if (videoLength > 60)
+			// 	{
+			// 		std::cout << "Story Exceeds 60 seconds!" << std::endl;
+			// 	}
+			// 	else
+			// 	{
+			// 		Story newStory(postType, postName, urlName, videoLength);
+			// 		user.addPost(newStory);
+			// 	}
+			// }
+			// else
+			// {
+			// 	std::cout << "Invalid choice" << std::endl;
+			// }
 
 			break;
 		}
@@ -115,6 +104,8 @@ void displayUserManu(User &user)
 		{
 			// TO DO: display all user's posts
 			//        You may re-use code from class demo
+			// Post newPost;
+			// std::cout << newPost;
 			user.displayAllPost();
 			break;
 		}
@@ -125,7 +116,7 @@ void displayUserManu(User &user)
 			//    return an error message that includes the size of the Linked Bag
 
 			int k;
-			std::cout << "Enter the index of the post to display.";
+			std::cout << "Enter the index of the post to display.\n";
 			std::cin >> k;
 
 			user.getKthPost(k - 1);
@@ -194,38 +185,17 @@ int main()
 {
 	// Instantiating the program using the default constructor
 	// With this implementation, the application will only have one user
+	User newUser;
 	Instagram340 instagram;
 	std::string username, password, email, bio, profilePic;
 
 	std::cout << instagram;
-	//cout << "\n Welcome to Instagram340:" << std::endl;
-	// TO DO: Ask the user to enter their information
-	//        Instantiate a new User object
+	std::cin >> newUser;
 
-	std::cout << "Enter your username: \n";
-	getline(cin, username);
+	 instagram.createUser(newUser.getUsername(), newUser.getPassword(), newUser.getEmail(), newUser.getBio(),newUser.getProfilePic());
 
-	std::cout << "Enter your password: \n";
-	getline(cin, password);
-
-	std::cout << "Enter your email: \n";
-	getline(cin, email);
-
-	std::cout << "Enter your bio: \n";
-	getline(cin, bio);
-
-	std::cout << "Enter the path to your profile picture: \n";
-	getline(cin, profilePic);
-
-	// Instantiate a new User object
-
-	// call instagram createUser function
-	// replace /*...*/ with the right parameters
-
-	instagram.createUser(username, password, email, bio, profilePic);
-
-	// // Retrieve the user
 	User currentUser = instagram.getUser(0);
+
 	displayUserManu(currentUser);
 
 	return 0;

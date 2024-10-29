@@ -84,9 +84,11 @@ void User::displayAllPost() const
 	int numberOfEntries = static_cast<int>(postItems.size());
 	for (int i = 0; i < numberOfEntries; i++)
 	{
-		std::cout << "Post Index: " << i + 1 << std::endl;
-		postItems[i].displayPost();
-		std::cout << "----------------------" << std::endl;
+		std::cout << "===== User Post =====" << std::endl;
+		std::cout << "Index: " << i + 1 << std::endl;
+		std::cout << postItems[i];
+		//std::cout << "----------------------" << std::endl;
+		std::cout << "========================" << std::endl;
 	}
 }
 
@@ -194,4 +196,23 @@ std::ostream &operator<<(std::ostream &out, const User &user)
 	out << "Profile Picture: " << user.profilePic << "\n";
 	out << "===== User Profile =====\n";
 	return out;
+}
+
+std::istream& operator>>(std::istream& in, User& user){
+	std::cout << "\nEnter your username: ";
+    getline(in, user.username);
+
+    std::cout << "Enter your password: ";
+    getline(in, user.password);
+
+    std::cout << "Enter your email: ";
+    getline(in, user.email);
+
+    std::cout << "Enter your bio: ";
+    getline(in, user.bio);
+
+    std::cout << "Enter the path to your profile picture: ";
+    getline(in, user.profilePic);
+
+    return in;
 }

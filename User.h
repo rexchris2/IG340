@@ -50,7 +50,7 @@ public:
   bool operator==(const User &otherUser) const;
 
   friend std::ostream &operator<<(std::ostream &out, const User &user);
-  //friend std::istream &operator<<(std::istream &in, const User &user);
+  friend std::istream &operator>>(std::istream &in, User &user);
 };
 
 #endif

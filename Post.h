@@ -42,6 +42,11 @@ public:
 
 
   int computeTimeToExpiration() const;
+  
+  friend std::istream& operator>>(std::istream& in, Post& post);
+
+  friend std::ostream& operator<<(std::ostream& out, const Post& post);
+   
 };
 
 // Reel is subclass of Post
