@@ -147,10 +147,10 @@ std::ostream &operator<<(std::ostream &out, const Post &post)
 	time_t time_stamp; // time stamp when post gets created
 	time(&time_stamp);
 	
-	out << "OverLoad\n";
+	out << "OverLoad PostFunc\n";
 	out << "Post Type: " << post.postType << "\n";
 	out << "Title: " << post.title << "\n";
-	out << "Media Url: http:// " << post.mediaUrl << "\n";
+	out << "Media Url: http://" << post.mediaUrl << "\n";
 	out << "Video Length: " << post.videoLength << " seconds" <<   "\n";
 	out << "Time Posted: " << ctime(&time_stamp) << "\n";
 	

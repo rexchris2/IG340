@@ -87,7 +87,6 @@ void User::displayAllPost() const
 		std::cout << "===== User Post =====" << std::endl;
 		std::cout << "Index: " << i + 1 << std::endl;
 		std::cout << postItems[i];
-		//std::cout << "----------------------" << std::endl;
 		std::cout << "========================" << std::endl;
 	}
 }
@@ -189,17 +188,16 @@ bool User::operator==(const User &otherUser) const
 std::ostream &operator<<(std::ostream &out, const User &user)
 {
 	out << "===== User Profile =====\n";
-	out << "Over\n";
 	out << "Username: " << user.username << "\n";
 	out << "Email: " << user.email << "\n";
 	out << "Bio: " << user.bio << "\n";
 	out << "Profile Picture: " << user.profilePic << "\n";
-	out << "===== User Profile =====\n";
+	out << "========================\n";
 	return out;
 }
 
 std::istream& operator>>(std::istream& in, User& user){
-	std::cout << "\nEnter your username: ";
+	std::cout << "Enter your username: ";
     getline(in, user.username);
 
     std::cout << "Enter your password: ";

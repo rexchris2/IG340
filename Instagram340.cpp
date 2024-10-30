@@ -43,7 +43,10 @@ User Instagram340::getUser(const int &indexK)
 }
 
 std::ostream &operator<<(std::ostream& out, const Instagram340& insta){
-	out << "Welcome to Instagram340!!!!!";
+	out << "\n\n=======================" << "\n";
+	out << "Welcome to Instagram340" << "\n";
+	out << "=======================" << "\n";
+	
 	return out;
 }
 

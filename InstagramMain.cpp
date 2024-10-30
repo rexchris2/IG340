@@ -19,19 +19,21 @@ using namespace std;
 void displayUserManu(User &user)
 {
 	int userChoice = 0;
-	do
-	{
-		cout << "\n Hi, " << user.getUsername() << ", what would you like to do:\n"
-				 << "1. Display Profile\n"
-				 << "2. Modify Password\n"
-				 << "3. Create Post\n"
-				 << "4. Display All Posts\n"
-				 << "5. Display Kth Post\n"
-				 << "6. Modify Post\n"
-				 << "7. Delete Post\n"
-				 << "8. Edit Post\n"
-				 << "0. Logout\n"
-				 << "Choice: ";
+	do{
+   std::cout << "\n==============================================================" << std::endl;
+   std::cout << "|                       Instagram340                         |" << std::endl;
+   std::cout << "==============================================================" << std::endl;
+		cout << "\nHi, " << user.getUsername() << ", what would you like to do:\n"
+			 << "1. Display Profile\n"
+			 << "2. Modify Password\n"
+			 << "3. Create Post\n"
+			 << "4. Display All Posts\n"
+			 << "5. Display Kth Post\n"
+			 << "6. Modify Post\n"
+			 << "7. Delete Post\n"
+			 << "8. Edit Post\n"
+			 << "0. Logout\n"
+			 << "Choice: ";
 		cin >> userChoice;
 		std::cout << "\n\n\n";
 
@@ -58,12 +60,12 @@ void displayUserManu(User &user)
 		}
 		case 3:
 		{
-			
+
 			// TO DO: ask user to choose between Reel and Story, ask them to input post details:
 			//        (title, media URL, video length in seconds)
 			//        Your program should set the time stamp to current time (code provided in Post.cpp)
 			// then create the post and add it to the user's posts
-		
+
 			Post newPost;
 
 			std::cin >> newPost;
@@ -171,7 +173,10 @@ void displayUserManu(User &user)
 		}
 		case 0:
 		{
-			cout << "Logging you out." << endl;
+			std::cout << "========================" << std::endl;
+			std::cout << "    Logging you out." << std::endl;
+			std::cout << "========================" << std::endl;
+
 			break;
 		}
 		default:
@@ -179,24 +184,50 @@ void displayUserManu(User &user)
 		}
 
 	} while (userChoice != 0);
+	return;
 }
 
 int main()
 {
 	// Instantiating the program using the default constructor
 	// With this implementation, the application will only have one user
-	User newUser;
+
 	Instagram340 instagram;
-	std::string username, password, email, bio, profilePic;
+	User newUser;
+	int userInput;
+	do
+	{
+		std::cout << instagram;
 
-	std::cout << instagram;
-	std::cin >> newUser;
+		std::cout << "1. Create Account\n";
+		std::cout << "2. Login\n";
+		std::cout << "3. Close App\n";
+		std::cout << "Choice: " << std::endl;
+		std::cin >> userInput;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	 instagram.createUser(newUser.getUsername(), newUser.getPassword(), newUser.getEmail(), newUser.getBio(),newUser.getProfilePic());
+		if (userInput == 1)
+		{
+			std::cout << "Account Creation!" << std::endl;
+			std::cin >> newUser;
 
-	User currentUser = instagram.getUser(0);
+			instagram.createUser(newUser.getUsername(), newUser.getPassword(), newUser.getEmail(), newUser.getBio(), newUser.getProfilePic());
 
-	displayUserManu(currentUser);
-
+			User currentUser = instagram.getUser(0);
+			displayUserManu(currentUser);
+		}
+		else if (userInput == 2)
+		{
+			std::cout << "Logining in" << std::endl;
+		}
+		else if (userInput == 3)
+		{
+			std::cout << "Closing Application" << std::endl;
+		}
+		else
+		{
+			std::cout << "Wrong Choice" << std::endl;
+		}
+	} while (userInput != 3);
 	return 0;
 }
