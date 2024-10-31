@@ -22,6 +22,11 @@ private:
 public:
   Post();
   Post(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength);
+ //BIG 3!!!
+  ~Post();
+  Post(const Post &other);
+  Post &operator=(const Post &other);
+
   void setPostType(const std::string &postType);
   void setTitle(const std::string &title);
   void setMediaUrl(const std::string &setMediaUrl);
@@ -40,13 +45,11 @@ public:
   // Operator overloading function prototype:
   bool operator==(const Post &otherPost) const;
 
-
   int computeTimeToExpiration() const;
-  
-  friend std::istream& operator>>(std::istream& in, Post& post);
 
-  friend std::ostream& operator<<(std::ostream& out, const Post& post);
-   
+  friend std::istream &operator>>(std::istream &in, Post &post);
+
+  friend std::ostream &operator<<(std::ostream &out, const Post &post);
 };
 
 // Reel is subclass of Post
