@@ -13,11 +13,35 @@ Post::Post() : postType(""), title(""), mediaUrl(""), videoLength(0)
 }
 
 Post::Post(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength)
-		: postType(postType), title(title), mediaUrl(mediaUrl), videoLength(videoLength)
+	: postType(postType), title(title), mediaUrl(mediaUrl), videoLength(videoLength)
 {
 	auto time_stamp = std::chrono::steady_clock::now();
 }
 
+Post::~Post()
+{
+}
+
+Post::Post(const Post &aPost)
+	: postType(aPost.postType), title(aPost.title), mediaUrl(aPost.mediaUrl),
+	  videoLength(aPost.videoLength), numLikes(aPost.numLikes),
+	  time_stamp(aPost.time_stamp)
+{
+}
+
+Post &Post::operator=(const Post &aPost)
+{
+	if (this != &aPost)
+	{
+		postType = aPost.postType;
+		title = aPost.title;
+		mediaUrl = aPost.mediaUrl;
+		videoLength = aPost.videoLength;
+		numLikes = aPost.numLikes;
+		time_stamp = aPost.time_stamp;
+	}
+	return *this;
+}
 void Post::setPostType(const std::string &newPostType)
 {
 	postType = newPostType;
@@ -97,10 +121,44 @@ int Post::computeTimeToExpiration() const
 Reel::Reel(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength) : Post(postType, title, mediaUrl, videoLength)
 {
 }
+// Destructor
+Reel::~Reel()
+{
+}
+Reel::Reel(const Reel &aReel)
+	: Post(aReel)
+{
+}
+Reel &Reel::operator=(const Reel &aReel)
+{
+	if (this != &aReel)
+	{
+		Post::operator=(aReel);
+	}
+	return *this;
+}
 
 // Story inherit from post
 Story::Story(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength) : Post(postType, title, mediaUrl, videoLength)
 {
+}
+// Destruc
+Story::~Story()
+{
+}
+
+Story::Story(const Story &aStory)
+	: Post(aStory)
+{
+}
+
+Story &Story::operator=(const Story &aStory)
+{
+	if (this != &aStory)
+	{
+		Post::operator=(aStory);
+	}
+	return *this;
 }
 void Story::displayPost() const
 {
@@ -120,39 +178,39 @@ void Story::displayPost() const
 std::istream &operator>>(std::istream &in, Post &post)
 {
 	std::string postType, title, mediaUrl;
-    int videoLength;
+	int videoLength;
 
-    std::cout << "Enter Post Type: ";
-    in >> postType;
-    post.setPostType(postType);
+	std::cout << "Enter Post Type: ";
+	in >> postType;
+	post.setPostType(postType);
 
-    std::cout << "Enter Title: ";
-    in.ignore();
-    std::getline(in, title);
-    post.setTitle(title);
+	std::cout << "Enter Title: ";
+	in.ignore();
+	std::getline(in, title);
+	post.setTitle(title);
 
-    std::cout << "Enter Media URL: ";
-    std::getline(in, mediaUrl);
-    post.setMediaUrl(mediaUrl);
+	std::cout << "Enter Media URL: ";
+	std::getline(in, mediaUrl);
+	post.setMediaUrl(mediaUrl);
 
-    std::cout << "Enter Video Length (seconds): ";
-    in >> videoLength;
-    post.setVideoLength(videoLength);
+	std::cout << "Enter Video Length (seconds): ";
+	in >> videoLength;
+	post.setVideoLength(videoLength);
 
-    return in;
+	return in;
 }
 
 std::ostream &operator<<(std::ostream &out, const Post &post)
 {
 	time_t time_stamp; // time stamp when post gets created
 	time(&time_stamp);
-	
+
 	out << "OverLoad PostFunc\n";
 	out << "Post Type: " << post.postType << "\n";
 	out << "Title: " << post.title << "\n";
 	out << "Media Url: http://" << post.mediaUrl << "\n";
-	out << "Video Length: " << post.videoLength << " seconds" <<   "\n";
+	out << "Video Length: " << post.videoLength << " seconds" << "\n";
 	out << "Time Posted: " << ctime(&time_stamp) << "\n";
-	
+
 	return out;
 }

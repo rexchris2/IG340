@@ -18,6 +18,9 @@ public:
    Node();
    Node(const ItemType& anItem);
    Node(const ItemType& anItem, std::shared_ptr<Node<ItemType>> nextNodePtr);
+   
+   virtual ~Node();
+   
    void setItem(const ItemType& anItem);
    void setNext(std::shared_ptr<Node<ItemType>> nextNodePtr);
    ItemType getItem() const ;

@@ -14,8 +14,22 @@ Instagram340::~Instagram340()
 	Instagram340::users.clear();
 }
 
+Instagram340::Instagram340(const Instagram340 &aInsta)
+	: users(aInsta.users)
+{
+}
+
+Instagram340 &Instagram340::operator=(const Instagram340 &aInsta)
+{
+	if (this != &aInsta)
+	{
+		users = aInsta.users;
+	}
+	return *this;
+}
+
 void Instagram340::createUser(const std::string &username, const std::string &password, const std::string &email,
-															const std::string &bio, const std::string &profilePicture)
+							  const std::string &bio, const std::string &profilePicture)
 {
 	// TO DO: implement function
 	User newU;
@@ -32,21 +46,23 @@ User Instagram340::getUser(const int &indexK)
 {
 	// TO DO: implement function
 
-		//Get node to find index
-	  std::shared_ptr<Node<User>> usrNode = users.findKthItem(indexK);
-    if (usrNode != nullptr) {
-        return usrNode->getItem();
-    } else {
-			return User();
-		}
-		
+	// Get node to find index
+	std::shared_ptr<Node<User>> usrNode = users.findKthItem(indexK);
+	if (usrNode != nullptr)
+	{
+		return usrNode->getItem();
+	}
+	else
+	{
+		return User();
+	}
 }
 
-std::ostream &operator<<(std::ostream& out, const Instagram340& insta){
+std::ostream &operator<<(std::ostream &out, const Instagram340 &insta)
+{
 	out << "\n\n=======================" << "\n";
 	out << "Welcome to Instagram340" << "\n";
 	out << "=======================" << "\n";
-	
+
 	return out;
 }
-

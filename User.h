@@ -22,6 +22,11 @@ public:
   User();
   User(const std::string &username, const std::string &password, const std::string &email, const std::string bio, const std::string &profilePic);
 
+  // Big 3!!
+  virtual ~User();
+  User(const User &aUser);
+  User &operator=(const User &aUser);
+
   void setUsername(const std::string &username);
   void setPassword(const std::string &password);
   void setEmail(const std::string &email);

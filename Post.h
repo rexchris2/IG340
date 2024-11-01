@@ -22,10 +22,11 @@ private:
 public:
   Post();
   Post(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength);
- //BIG 3!!!
-  ~Post();
-  Post(const Post &other);
-  Post &operator=(const Post &other);
+
+  // BIG 3!!!
+  virtual ~Post();
+  Post(const Post &aPost);
+  Post &operator=(const Post &aPost);
 
   void setPostType(const std::string &postType);
   void setTitle(const std::string &title);
@@ -57,7 +58,11 @@ class Reel : public Post
 {
 private:
 public:
+  Reel();
   Reel(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength);
+  virtual ~Reel();
+  Reel(const Reel &aReel);
+  Reel &operator=(const Reel &aReel);
 };
 
 // Story is subclass of Post
@@ -65,8 +70,11 @@ class Story : public Post
 {
 private:
 public:
+  Story();
   Story(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength);
-
+  virtual ~Story();
+  Story(const Story &aStory);
+  Story &operator=(const Story &aStory);
   void displayPost() const override;
 };
 

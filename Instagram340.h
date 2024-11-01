@@ -15,11 +15,16 @@ private:
 
 public:
 	Instagram340();
-	~Instagram340();
+
+	// Big 3!!
+	virtual ~Instagram340();
+	Instagram340(const Instagram340 &aInsta);
+	Instagram340 &operator=(const Instagram340 &aInsta);
 
 	void createUser(const std::string &username, const std::string &password, const std::string &email,
-									const std::string &bio, const std::string &profilePicture);
+					const std::string &bio, const std::string &profilePicture);
 
+	void login();
 	User getUser(const int &indexK);
 
 	friend std::ostream &operator<<(std::ostream &out, const Instagram340 &insta);

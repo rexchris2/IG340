@@ -7,7 +7,30 @@ User::User()
 {
 }
 
-void User::setUsername(const std::string &newUName)
+User::~User()
+{
+	clear();
+}
+
+User::User(const User &aUser)
+	: LinkedBag<Post>(aUser), username(aUser.username), password(aUser.password),
+	  email(aUser.email), bio(aUser.bio), profilePic(aUser.profilePic), posts(aUser.posts)
+{
+}
+
+User &User::operator=(const User &aUser){
+	if(this != &aUser){
+		LinkedBag<Post>::operator=(aUser);
+		username = aUser.username;
+		password = aUser.password;
+		email = aUser.email;
+		bio = aUser.bio;
+		profilePic = aUser.profilePic;
+	}
+	return *this;
+}
+
+	void User::setUsername(const std::string &newUName)
 {
 	username = newUName;
 }
@@ -156,7 +179,7 @@ void User::editPost(int k)
 
 	if (edit != nullptr)
 	{
-		Post editItem = edit->getItem();					 // Get the item
+		Post editItem = edit->getItem();		   // Get the item
 		std::string type = editItem.getPostType(); // Get the Post Type
 
 		// Post edit outcomes for reel and story
@@ -196,21 +219,22 @@ std::ostream &operator<<(std::ostream &out, const User &user)
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, User& user){
+std::istream &operator>>(std::istream &in, User &user)
+{
 	std::cout << "Enter your username: ";
-    getline(in, user.username);
+	getline(in, user.username);
 
-    std::cout << "Enter your password: ";
-    getline(in, user.password);
+	std::cout << "Enter your password: ";
+	getline(in, user.password);
 
-    std::cout << "Enter your email: ";
-    getline(in, user.email);
+	std::cout << "Enter your email: ";
+	getline(in, user.email);
 
-    std::cout << "Enter your bio: ";
-    getline(in, user.bio);
+	std::cout << "Enter your bio: ";
+	getline(in, user.bio);
 
-    std::cout << "Enter the path to your profile picture: ";
-    getline(in, user.profilePic);
+	std::cout << "Enter the path to your profile picture: ";
+	getline(in, user.profilePic);
 
-    return in;
+	return in;
 }
