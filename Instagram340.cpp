@@ -15,7 +15,7 @@ Instagram340::~Instagram340()
 }
 
 Instagram340::Instagram340(const Instagram340 &aInsta)
-	: users(aInsta.users)
+		: users(aInsta.users)
 {
 }
 
@@ -29,7 +29,7 @@ Instagram340 &Instagram340::operator=(const Instagram340 &aInsta)
 }
 
 void Instagram340::createUser(const std::string &username, const std::string &password, const std::string &email,
-							  const std::string &bio, const std::string &profilePicture)
+															const std::string &bio, const std::string &profilePicture)
 {
 	// TO DO: implement function
 	User newU;
@@ -65,4 +65,23 @@ std::ostream &operator<<(std::ostream &out, const Instagram340 &insta)
 	out << "=======================" << "\n";
 
 	return out;
+}
+
+bool Instagram340::loginUser(const std::string &username, const std::string &password, User &currentUser)
+{
+	for (int i = 0; i < users.getSize(); ++i)
+	{
+		auto usrNode = users.findKthItem(i);
+
+		if (usrNode != nullptr)
+		{
+			User tempUser = usrNode->getItem();
+			if (tempUser.getUsername() == username && tempUser.getPassword() == password)
+			{
+				currentUser = tempUser;
+				return true;
+			}
+		}
+	}
+	return false;
 }

@@ -19,21 +19,22 @@ using namespace std;
 void displayUserManu(User &user)
 {
 	int userChoice = 0;
-	do{
-   std::cout << "\n==============================================================" << std::endl;
-   std::cout << "|                       Instagram340                         |" << std::endl;
-   std::cout << "==============================================================" << std::endl;
+	do
+	{
+		std::cout << "\n==============================================================" << std::endl;
+		std::cout << "|                       Instagram340                         |" << std::endl;
+		std::cout << "==============================================================" << std::endl;
 		cout << "\nHi, " << user.getUsername() << ", what would you like to do:\n"
-			 << "1. Display Profile\n"
-			 << "2. Modify Password\n"
-			 << "3. Create Post\n"
-			 << "4. Display All Posts\n"
-			 << "5. Display Kth Post\n"
-			 << "6. Modify Post\n"
-			 << "7. Delete Post\n"
-			 << "8. Edit Post\n"
-			 << "0. Logout\n"
-			 << "Choice: ";
+				 << "1. Display Profile\n"
+				 << "2. Modify Password\n"
+				 << "3. Create Post\n"
+				 << "4. Display All Posts\n"
+				 << "5. Display Kth Post\n"
+				 << "6. Modify Post\n"
+				 << "7. Delete Post\n"
+				 << "8. Edit Post\n"
+				 << "0. Logout\n"
+				 << "Choice: ";
 		cin >> userChoice;
 		std::cout << "\n\n\n";
 
@@ -67,39 +68,43 @@ void displayUserManu(User &user)
 			// then create the post and add it to the user's posts
 
 			Post newPost;
+			std::string postType;
 
+			std::cout << "Enter Post Type (Reel or Story):";
+			std::cin >> postType;
+			std::cin.ignore();
 			std::cin >> newPost;
-			user.addPost(newPost);
 
-			// if (postType == "Reel")
-			// {
-			// 	if (videoLength > 90)
-			// 	{
-			// 		std::cout << "Reel Exceeds 90 seconds!" << std::endl;
-			// 	}
-			// 	else
-			// 	{
-			// 		Reel newReel(postType, postName, urlName, videoLength);
-			// 		user.addPost(newReel);
-			// 	}
-			// }
-			// else if (postType == "Story")
-			// {
-			// 	if (videoLength > 60)
-			// 	{
-			// 		std::cout << "Story Exceeds 60 seconds!" << std::endl;
-			// 	}
-			// 	else
-			// 	{
-			// 		Story newStory(postType, postName, urlName, videoLength);
-			// 		user.addPost(newStory);
-			// 	}
-			// }
-			// else
-			// {
-			// 	std::cout << "Invalid choice" << std::endl;
-			// }
-
+			if (postType == "Reel")
+			{
+				if (newPost.getVideoLength() > 90)
+				{
+					std::cout << "Reel exceeds 90 seconds!" << std::endl;
+				}
+				else
+				{
+					Reel newReel("Reel", newPost.getTitle(), newPost.getMediaUrl(), newPost.getVideoLength());
+					user.addPost(newReel);
+					std::cout << "Reel added successfully!" << std::endl;
+				}
+			}
+			else if (postType == "Story")
+			{
+				if (newPost.getVideoLength() > 60)
+				{
+					std::cout << "Story exceeds 60 seconds!" << std::endl;
+				}
+				else
+				{
+					Story newStory("Story", newPost.getTitle(), newPost.getMediaUrl(), newPost.getVideoLength());
+					user.addPost(newStory);
+					std::cout << "Story added successfully!" << std::endl;
+				}
+			}
+			else
+			{
+				std::cout << "Invalid post type. Please enter either 'Reel' or 'Story'." << std::endl;
+			}
 			break;
 		}
 		case 4:
@@ -218,8 +223,24 @@ int main()
 		}
 		else if (userInput == 2)
 		{
-			std::cout << "Logining in" << std::endl;
+			std::string username, password;
+			std::cout << "Enter your username: ";
+			std::cin >> username;
+			std::cout << "Enter your password: ";
+			std::cin >> password;
+			User currentUser;
+
+			if (instagram.loginUser(username, password, currentUser))
+			{
+				std::cout << "Login successful!" << std::endl;
+				displayUserManu(currentUser);
+			}
+			else
+			{
+				std::cout << "Invalid username or password. Please try again." << std::endl;
+			}
 		}
+
 		else if (userInput == 3)
 		{
 			std::cout << "Closing Application" << std::endl;

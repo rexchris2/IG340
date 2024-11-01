@@ -16,7 +16,7 @@ class LinkedBag : public BagInterface<ItemType>
 {
 private:
 	std::shared_ptr<Node<ItemType>> headPtr; // Pointer to first node
-	int itemCount;							 // Current count of bag items
+	int itemCount;													 // Current count of bag items
 
 	// Returns either a pointer to the node containing a given entry
 	// or the null pointer if the entry is not in the bag.
@@ -26,13 +26,14 @@ private:
 public:
 	LinkedBag();
 	LinkedBag(const LinkedBag<ItemType> &aBag); // Copy constructor
-	virtual ~LinkedBag();						// Destructor should be virtual
-	LinkedBag<ItemType> &operator=(const LinkedBag<ItemType> &aBag);
-	// Assignment 2 functions -------------------------------------------
+	virtual ~LinkedBag();												// Destructor should be virtual
+
+	// LinkedBag<ItemType> &operator=(const LinkedBag<ItemType> &aBag);
+	//  Assignment 2 functions -------------------------------------------
 	bool append(const ItemType &newEntry);
 	std::shared_ptr<Node<ItemType>> findKthItem(const int &indexK) const;
 	// ------------------------------------------------------------------
-
+	int getSize() const;
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType &newEntry);

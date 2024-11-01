@@ -13,13 +13,15 @@ User::~User()
 }
 
 User::User(const User &aUser)
-	: LinkedBag<Post>(aUser), username(aUser.username), password(aUser.password),
-	  email(aUser.email), bio(aUser.bio), profilePic(aUser.profilePic), posts(aUser.posts)
+		: LinkedBag<Post>(aUser), username(aUser.username), password(aUser.password),
+			email(aUser.email), bio(aUser.bio), profilePic(aUser.profilePic), posts(aUser.posts)
 {
 }
 
-User &User::operator=(const User &aUser){
-	if(this != &aUser){
+User &User::operator=(const User &aUser)
+{
+	if (this != &aUser)
+	{
 		LinkedBag<Post>::operator=(aUser);
 		username = aUser.username;
 		password = aUser.password;
@@ -30,7 +32,7 @@ User &User::operator=(const User &aUser){
 	return *this;
 }
 
-	void User::setUsername(const std::string &newUName)
+void User::setUsername(const std::string &newUName)
 {
 	username = newUName;
 }
@@ -179,7 +181,7 @@ void User::editPost(int k)
 
 	if (edit != nullptr)
 	{
-		Post editItem = edit->getItem();		   // Get the item
+		Post editItem = edit->getItem();					 // Get the item
 		std::string type = editItem.getPostType(); // Get the Post Type
 
 		// Post edit outcomes for reel and story

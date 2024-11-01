@@ -13,7 +13,7 @@ Post::Post() : postType(""), title(""), mediaUrl(""), videoLength(0)
 }
 
 Post::Post(const std::string &postType, const std::string &title, const std::string &mediaUrl, int videoLength)
-	: postType(postType), title(title), mediaUrl(mediaUrl), videoLength(videoLength)
+		: postType(postType), title(title), mediaUrl(mediaUrl), videoLength(videoLength)
 {
 	auto time_stamp = std::chrono::steady_clock::now();
 }
@@ -23,9 +23,9 @@ Post::~Post()
 }
 
 Post::Post(const Post &aPost)
-	: postType(aPost.postType), title(aPost.title), mediaUrl(aPost.mediaUrl),
-	  videoLength(aPost.videoLength), numLikes(aPost.numLikes),
-	  time_stamp(aPost.time_stamp)
+		: postType(aPost.postType), title(aPost.title), mediaUrl(aPost.mediaUrl),
+			videoLength(aPost.videoLength), numLikes(aPost.numLikes),
+			time_stamp(aPost.time_stamp)
 {
 }
 
@@ -126,7 +126,7 @@ Reel::~Reel()
 {
 }
 Reel::Reel(const Reel &aReel)
-	: Post(aReel)
+		: Post(aReel)
 {
 }
 Reel &Reel::operator=(const Reel &aReel)
@@ -148,7 +148,7 @@ Story::~Story()
 }
 
 Story::Story(const Story &aStory)
-	: Post(aStory)
+		: Post(aStory)
 {
 }
 
@@ -180,9 +180,9 @@ std::istream &operator>>(std::istream &in, Post &post)
 	std::string postType, title, mediaUrl;
 	int videoLength;
 
-	std::cout << "Enter Post Type: ";
-	in >> postType;
-	post.setPostType(postType);
+	// std::cout << "Enter Post Type: ";
+	// in >> postType;
+	// post.setPostType(postType);
 
 	std::cout << "Enter Title: ";
 	in.ignore();

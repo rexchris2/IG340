@@ -22,9 +22,10 @@ public:
 	Instagram340 &operator=(const Instagram340 &aInsta);
 
 	void createUser(const std::string &username, const std::string &password, const std::string &email,
-					const std::string &bio, const std::string &profilePicture);
+									const std::string &bio, const std::string &profilePicture);
 
-	void login();
+	bool loginUser(const std::string &username, const std::string &password, User &currentUser);
+
 	User getUser(const int &indexK);
 
 	friend std::ostream &operator<<(std::ostream &out, const Instagram340 &insta);
